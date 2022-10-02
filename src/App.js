@@ -14,8 +14,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [elementsPerPage, setElementsPerPage] = useState(18);
 
-  const valueArray = inputValue.trim().replace(/\s+/g, " ").split(" ");
-
   useEffect(() => {
     (async () => {
       const url = "https://damp-sands-59463.herokuapp.com/users";
@@ -28,43 +26,40 @@ function App() {
     if (inputValue.length > 0) {
       switch (conditionSelect) {
         case "include":
-          return valueArray.every((word) => {
-            if (columnSelect === "name") {
-              return itemData.name.toLowerCase().includes(word.toLowerCase());
-            } else if (columnSelect === "quanity")
-              return itemData.quanity.toString().includes(word.toLowerCase());
-            else
-              return itemData.distance.toString().includes(word.toLowerCase());
-          });
+          if (columnSelect === "name") {
+            return itemData.name
+              .toLowerCase()
+              .includes(inputValue.toLowerCase());
+          } else if (columnSelect === "quanity")
+            return itemData.quanity
+              .toString()
+              .includes(inputValue.toLowerCase());
+          else
+            return itemData.distance
+              .toString()
+              .includes(inputValue.toLowerCase());
         case "equals":
-          return valueArray.every((word) => {
-            if (columnSelect === "name") {
-              return itemData.name.toLowerCase() === word.toLocaleLowerCase();
-            } else if (columnSelect === "quanity")
-              return itemData.quanity === +word;
-            else return itemData.distance === +word;
-          });
+          if (columnSelect === "name") {
+            return itemData.name.toLowerCase() === inputValue.toLowerCase();
+          } else if (columnSelect === "quanity")
+            return itemData.quanity === +inputValue;
+          else return itemData.distance === +inputValue;
         case "more":
-          return valueArray.every((word) => {
-            if (columnSelect === "quanity") return itemData.quanity > word;
-            else return itemData.distance > word;
-          });
+          if (columnSelect === "quanity") return itemData.quanity > inputValue;
+          else return itemData.distance > inputValue;
         case "less":
-          return valueArray.every((word) => {
-            if (columnSelect === "quanity") return itemData.quanity < word;
-            else return itemData.distance < word;
-          });
+          if (columnSelect === "quanity") return itemData.quanity < inputValue;
+          else return itemData.distance < inputValue;
         default:
           return data;
       }
-    } else return data;
+    }
+    return data;
   });
 
   const lastArrayIndex = currentPage * elementsPerPage;
   const firstArrayIndex = lastArrayIndex - elementsPerPage;
-  const currentElement = filteredArray.slice(firstArrayIndex, lastArrayIndex);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const currentElement = filteredArray.slice(firstArrayIndex, lastArrayIndex);  
 
   return (
     <div className="container">
@@ -83,13 +78,15 @@ function App() {
         setOrder={setOrder}
       />
       <footer>
-        <Pagination
-          elementsPerPage={elementsPerPage}
-          totalElements={filteredArray.length}
-          paginate={paginate}
-          currentPage={currentPage}
-          setElementsPerPage={setElementsPerPage}
-        />
+        {filteredArray.length > 0 ? (
+          <Pagination
+            elementsPerPage={elementsPerPage}
+            totalElements={filteredArray.length}
+            paginate={setCurrentPage}
+            currentPage={currentPage}
+            setElementsPerPage={setElementsPerPage}
+          />
+        ) : null}
       </footer>
     </div>
   );

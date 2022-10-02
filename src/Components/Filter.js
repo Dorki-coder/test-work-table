@@ -12,6 +12,7 @@ const Filter = ({
         onChange={(e) => {
           const selected = e.target.value;
           setColumnSelect(selected);
+          // we can't filter more or less for users words and therefore we set condition to include
           if (e.target.value === "name") setConditionSelect("include");
         }}
       >
@@ -23,26 +24,18 @@ const Filter = ({
         className="search__input"
         value={conditionSelect}
         onChange={(e) => {
-          const selected = e.target.value;
-          setConditionSelect(selected);
+          const condition = e.target.value;
+          setConditionSelect(condition);
         }}
       >
         <option value="include">Содержит</option>
         <option value="equals">Равно</option>
-        {columnSelect === "name" ? (
-          <option value="more" disabled>
-            Больше
-          </option>
-        ) : (
-          <option value="more">Больше</option>
-        )}
-        {columnSelect === "name" ? (
-          <option value="less" disabled>
-            Меньше
-          </option>
-        ) : (
-          <option value="less">Меньше</option>
-        )}
+        <option value="more" disabled={columnSelect === "name"}>
+          Больше
+        </option>
+        <option value="less" disabled={columnSelect === "name"}>
+          Больше
+        </option>
       </select>
       <input
         onChange={(event) => {

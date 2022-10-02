@@ -6,18 +6,23 @@ const Pagination = ({
   currentPage,
 }) => {
   const pageNumber = [];
+  const paginateButtonsAmount = 5;
   for (let i = 1; i <= Math.ceil(totalElements / elementsPerPage); i++) {
     pageNumber.push(i);
   }
   const outPageNumber = [];
   if (currentPage === 1 || currentPage === 2) {
-    for (let i = 1; outPageNumber.length < 5 && i <= pageNumber.length; i++) {
+    for (
+      let i = 1;
+      outPageNumber.length < paginateButtonsAmount && i <= pageNumber.length;
+      i++
+    ) {
       outPageNumber.push(i);
     }
   } else {
     for (
       let i = currentPage - 2;
-      outPageNumber.length < 5 && i <= pageNumber.length;
+      outPageNumber.length < paginateButtonsAmount && i <= pageNumber.length;
       i++
     ) {
       outPageNumber.push(i);
@@ -32,7 +37,7 @@ const Pagination = ({
           return (
             <li key={element}>
               <button
-                className={`${currentPage === element ? "active " : null}`}
+                className={currentPage === element ? "active " : null}
                 onClick={() => paginate(element)}
               >
                 {element}

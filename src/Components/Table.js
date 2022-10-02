@@ -16,9 +16,39 @@ const Table = ({ setData, setOrder, order, currentElement, data }) => {
     <table className="list">
       <thead>
         <tr className="element header">
-          <th onClick={() => sorting("name")}>Название</th>
-          <th onClick={() => sorting("distance")}>Расстояние</th>
-          <th onClick={() => sorting("quanity")}>Количество</th>
+          <th onClick={() => sorting("name")}>
+            Название{" "}
+            <svg width="20" height="8" xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke="#FFFFFF"
+                stroke-width="1.5"
+                fill="none"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </th>
+          <th onClick={() => sorting("distance")}>
+            Расстояние{" "}
+            <svg width="20" height="8" xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke="#FFFFFF"
+                stroke-width="1.5"
+                fill="none"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </th>
+          <th onClick={() => sorting("quanity")}>
+            Количество{" "}
+            <svg width="20" height="8" xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke="#FFFFFF"
+                stroke-width="1.5"
+                fill="none"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </th>
           <th>Дата</th>
         </tr>
       </thead>
