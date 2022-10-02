@@ -18,12 +18,12 @@
   color: #ffffff;
   border-radius: 20px 20px 0 0;
   background-color: #078080;
-}
+  cursor: pointer;
+}   
 
 table {
   width: 100%;
   margin: auto;
-
   border-radius: 20px;
 }
 
