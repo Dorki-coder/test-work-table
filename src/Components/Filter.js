@@ -34,7 +34,7 @@ const Filter = ({
           Больше
         </option>
         <option value="less" disabled={columnSelect === "name"}>
-          Больше
+          Меньше
         </option>
       </select>
       <input

@@ -10,6 +10,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [columnSelect, setColumnSelect] = useState("name");
   const [conditionSelect, setConditionSelect] = useState("include");
+  const [isLoading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [elementsPerPage, setElementsPerPage] = useState(18);
@@ -20,6 +21,7 @@ function App() {
       const response = await fetch(url);
       const json = await response.json();
       setData(json);
+      setLoading(false);
     })();
   }, []);
   const filteredArray = data.filter((itemData) => {
@@ -59,7 +61,7 @@ function App() {
 
   const lastArrayIndex = currentPage * elementsPerPage;
   const firstArrayIndex = lastArrayIndex - elementsPerPage;
-  const currentElement = filteredArray.slice(firstArrayIndex, lastArrayIndex);  
+  const currentElement = filteredArray.slice(firstArrayIndex, lastArrayIndex);
 
   return (
     <div className="container">
@@ -70,13 +72,18 @@ function App() {
         setConditionSelect={setConditionSelect}
         setInputValue={setInputValue}
       />
-      <Table
-        currentElement={currentElement}
-        setData={setData}
-        data={data}
-        order={order}
-        setOrder={setOrder}
-      />
+      {isLoading === false ? (
+        <Table
+          currentElement={currentElement}
+          setData={setData}
+          data={data}
+          order={order}
+          setOrder={setOrder}
+        />
+      ) : (
+        <p>loading...</p>
+      )}
+
       <footer>
         {filteredArray.length > 0 ? (
           <Pagination

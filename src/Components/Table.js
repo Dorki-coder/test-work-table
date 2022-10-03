@@ -52,16 +52,20 @@ const Table = ({ setData, setOrder, order, currentElement, data }) => {
           <th>Дата</th>
         </tr>
       </thead>
-      <tbody>
-        {currentElement.map((element) => (
-          <tr key={element.id} className="element">
-            <th>{element.name}</th>
-            <th>{element.distance}км</th>
-            <th>{element.quanity}шт.</th>
-            <th>{element.date}</th>
-          </tr>
-        ))}
-      </tbody>
+      {currentElement.length > 0 ? (
+        <tbody>
+          {currentElement.map((element) => (
+            <tr key={element.id} className="element">
+              <th>{element.name}</th>
+              <th>{element.distance}км</th>
+              <th>{element.quanity}шт.</th>
+              <th>{element.date}</th>
+            </tr>
+          ))}
+        </tbody>
+      ) : (
+        "По запросу ничего не найдено"
+      )}
     </table>
   );
 };

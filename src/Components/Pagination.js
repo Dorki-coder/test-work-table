@@ -53,6 +53,7 @@ const Pagination = ({
           onChange={(e) => {
             const selected = +e.target.value;
             setElementsPerPage(selected);
+            paginate(1);
           }}
         >
           <option value={18}>18</option>
